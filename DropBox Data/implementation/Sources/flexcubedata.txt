@@ -1,0 +1,153 @@
+use MCBI_STG_DB;
+
+create table STG_STTM_Customer (Customer_id int not null primary key , Customer_name varchar (20) not null ,Customer_Account_No varchar(20),
+                                Customer_Password varchar(20), Customer_CNIC_No varchar (20) not null , Customer_Account_Id varchar(20),
+                                Branch_No varchar(20), Registered_Date date ,Customer_Alias varchar() );
+
+insert into customer_Flex values(1,'JHON','1','123','222','2016-02-11','AAA');
+insert into customer_Flex values(2,'SMITH','2','122','333','10-3-2136','BBB');
+insert into customer_Flex values(3,'JULI','3','993','444','10-4-2136','CCC');
+insert into customer_Flex values(4,'JAMES','4','126','555','10-5-2136','DDD');
+insert into customer_Flex values(5,'HARRY','5','126','666','10-6-2136','EEE');
+insert into customer_Flex values(6,'OBAMA','6','093','777','10-7-2136','FFF');
+insert into customer_Flex values(7,'KETHRIN','7','003','888','10-8-2136','GGG');
+insert into customer_Flex values(8,'EDWARD','8','188','999','10-9-2136','HHH');
+insert into customer_Flex values(9,'JHON','9','16','111','10-10-2136','III');
+insert into customer_Flex values(10,'JAMES','10','193','122','10-11-2136','JJJ');
+
+create table STG_STTM_Customer_Contact (Customer_id int not null foreign key references STG_STTM_Customer(Customer_id),Customer_Contact int not null primary key,Customer_Contact_Id int not null,Customer_Email varchar (20) not null ,Customer_PostalCode varchar (15) not null,Customer_Address varchar(20),
+Customer_State varchar (20) not null ,Customer_City varchar (20) , Customer_Country_Citizen varchar(20) );
+
+insert into Customer_Contact values(1, '12345', 1, 'ABC@1231', '+92', 'Washington221', 'Texas', 'Boston', 'Boston');
+insert into Customer_Contact values(2, '67899', 2, 'BBC@1234', '+92', 'Washington231', 'Texas', 'Boston', 'Boston');
+insert into Customer_Contact values(3, '98745', 3, 'MBC@1235', '+92', 'Washington241', 'Texas', 'Boston', 'Boston');
+insert into Customer_Contact values(4, '43210', 4, 'LBC@1236', '+92', 'Washington251', 'Texas', 'Boston', 'Boston');
+insert into Customer_Contact values(5, '52369', 5, 'YBC@1237', '+92', 'Washington261', 'Texas', 'Boston', 'Boston');
+insert into Customer_Contact values(6, '14789', 6, 'KBC@1238', '+92', 'Washington271', 'Texas', 'Boston', 'Boston');
+insert into Customer_Contact values(7, '02589', 7, 'TBC@1239', '+92', 'Washington281', 'Texas', 'Boston', 'Boston');
+insert into Customer_Contact values(8, '36980', 8, 'GBC@1230', '+92', 'Washington291', 'Texas', 'Boston', 'Boston');
+insert into Customer_Contact values(9, '35715', 9, 'HBC@1222', '+92', 'Washington201', 'Texas', 'Boston', 'Boston');
+insert into Customer_Contact values(10,'35796', 10, 'CBC@1232', '+92', 'Washington211', 'Texas', 'Boston', 'Boston');
+
+
+create table STG_STTM_Customer_Closure (Customer id int not null 2foreign key references STG_STTM_Customer(Customer_id), Customer_Closure_id int not null primary key,
+Start_date date, End_date date, Customer_Closure_Reason varchar(20);
+									
+insert into Customer_Closure values(1, 1, '9999-02-11', '2016-02-11', 'potential lost');
+insert into Customer_Closure values(2, 2, '9999-02-11', '2017-01-10', 'potential lost');
+insert into Customer_Closure values(3, 3, '9999-02-11', '2017-01-11', 'potential lost');
+insert into Customer_Closure values(4, 4, '9999-02-11', '2017-01-22', 'potential lost');
+insert into Customer_Closure values(5, 5, '9999-02-11', '2015-02-11', 'potential lost');
+insert into Customer_Closure values(6, 6, '9999-02-11', '2015-02-11', 'potential lost');
+insert into Customer_Closure values(7, 7, '9999-02-11', '2015-02-18', 'potential lost');
+insert into Customer_Closure values(8, 8, '9999-02-11', '2016-08-15', 'potential lost');
+insert into Customer_Closure values(9, 9, '9999-02-11', '2016-09-25', 'potential lost');
+insert into Customer_Closure values(10, 10, '2001-02-11', '2016-02-11', 'potential lost');
+
+create table STG_STTM_Customer_INDVL (Customer_id int not null foreign key references STG_STTM_Customer,Customer_INDVL_ID int not null ,
+Customer_First_name varchar (20) not null , Customer_Last_name varchar (20) not null , Customer_Middle_name varchar (20) not null , Customer_Salutation varchar (20) , 
+Customer_Dob date , Gender varchar (10) , Customer_marital_status varchar (20) );
+
+insert into Customer_INDVL values(1, 1, 'JHON', 'JOE', 'J', 'Dear JHON' , '2016-02-11' , 'MALE' , 'SINGLE');
+insert into Customer_INDVL values(2, 2, 'SMITH', 'CARL', 'S', 'Dear SMITH'  , '2017-01-10' , 'MALE' , 'SINGLE');
+insert into Customer_INDVL values(3, 3, 'JULI', 'OBROYE', 'JU', 'Dear JULI' , '2017-01-11' , 'FEMALE' , 'SINGLE');
+insert into Customer_INDVL values(4, 4, 'JAMES', 'JANE', 'JA', 'Dear JAMES ' , '2017-01-22', 'MALE' , 'SINGLE');
+insert into Customer_INDVL values(5, 5, 'HARRY', 'POTTOR', 'HR', 'Dear HARRY' , '2015-02-11' , 'MALE' , 'SINGLE');
+insert into Customer_INDVL values(6, 6, 'OBAMA', 'AMERICA', 'OB', 'Dear OBAMA' , '2015-02-11' , 'MALE' , 'SINGLE');
+insert into Customer_INDVL values(7, 7, 'KATHERINE', 'CHIPS', 'KAT', 'Dear KATHERINE' , '2015-02-18' , 'FEMALE' , 'SINGLE');
+insert into Customer_INDVL values(8, 8, 'EDWARD', 'CAROL', 'ED', 'Dear EDWARD' , '2016-08-15' , 'MALE' , 'SINGLE');
+insert into Customer_INDVL values(9, 9, 'JHON', 'HARRY', 'JH', 'Dear JHON' , '2016-09-25' , 'MALE' , 'SINGLE');
+insert into Customer_INDVL values(10,10, 'JAMES', 'SPIDER', 'JM', 'Dear JAMES' , '2016-02-11' , 'MALE' , 'SINGLE');
+
+create table STG_Account (Account_id int not null primary key , Account_info_id int not null , Account_status varchar (20) , Account_ATM_Limit int , Account_Ownership_type varchar (20) , Account_Deposit_type varchar (20) , Account_Value_Date_mode date , Zakat_exempt varchar (20) );
+
+insert into Account values(1 , 1 ,'Active' , 1000000 , 'Joint' , 'Balance' , '2016-02-11' , 'Gold', 50000, 500000);
+insert into Account values(2 , 2 ,'Active' , 1000000 , 'Single' , 'Balance' , '2017-01-10' , 'Gold', 50000, 500000);
+insert into Account values(3 , 3 ,'Active' , 1000000 , 'Joint' , 'Balance' , '2017-01-11' , 'Gold', 50000, 500000);
+insert into Account values(4 , 4 ,'Active' , 1000000 , 'Single' , 'Balance' , '2017-01-22' , 'Gold', 50000, 500000);
+insert into Account values(5 , 5 ,'Active' , 1000000 , 'Joint' , 'Balance' , '2015-02-11' , 'Silver', 50000, 500000);
+insert into Account values(6 , 6 ,'Active' , 1000000 , 'Single', 'Balance' , '2015-02-11' , 'Silver', 50000, 500000);
+insert into Account values(7 , 7 ,'Active' , 1000000 , 'Joint' , 'Balance' , '2015-02-18' , 'Silver', 50000, 500000);
+insert into Account values(8 , 8 ,'Active' , 1000000 , 'Single' , 'Balance' , '2016-08-15' , 'Amount', 50000, 500000);
+insert into Account values(9 , 9 ,'Active' , 1000000 , 'Joint' , 'Balance' , '2016-09-25' , 'Amount', 50000, 500000);
+insert into Account values(10 ,10 ,'Active' , 1000000 , 'Joint' , 'Balance' , '2016-02-11' , 'Amount', 50000, 500000);
+
+
+
+create table STG_STTM_Account_info (Account_info_id int not null primary key, Account_status varchar (15) not null, 
+									Account_ATM_limit int, Ownership_type varchar (25), deposite_type varchar (25),
+									value_date_mode varchar (15), Zakat_exempt varchar (15));
+
+insert into STG_STTM_Account_info values(1, 'Active', 20000, 'Single', 'Saving', 'Allowed', 'Allowed');
+insert into STG_STTM_Account_info values(2, 'Active', 40000, 'Joint', 'Saving', 'Not Allowed', 'Allowed');
+insert into STG_STTM_Account_info values(3, 'Active', 20000, 'Single', 'Current', 'Not Allowed', 'Not Allowed');
+insert into STG_STTM_Account_info values(4, 'Active', 50000, 'Joint', 'Current', 'Not Allowed', 'Allowed');
+insert into STG_STTM_Account_info values(5, 'Active', 80000, 'Single', 'Current', 'Allowed', 'Not Allowed');
+insert into STG_STTM_Account_info values(6, 'Not Active', 20000, 'Joint', 'Saving', 'Allowed', 'Allowed',);
+insert into STG_STTM_Account_info values(7, 'Active', 100000, 'Single', 'Saving', 'Allowed', 'Allowed',);
+insert into STG_STTM_Account_info values(8, 'Active', 35000, 'Single', 'Saving', 'Not Allowed', 'Allowed');
+insert into STG_STTM_Account_info values(9, 'Not Active', 20000, 'Single', 'Saving', 'Allowed', 'Not Allowed');
+insert into STG_STTM_Account_info values(10, 'Active', 30000, 'Joint', 'Saving', 'Allowed', 'Allowed');
+
+
+create table STG_STTM_Account_Transaction (Internal_key int not null, Account_transaction_id int not null,
+										transaction_account_no int not null, transaction_time varchar (20),
+										transaction_date date, open_transaction_date date, last_transaction date, 
+										Restraint_present varchar (10), primary key (Internal_key, Account_transaction_id));
+									
+insert into STG_STTM_Account_Transaction values(111, 1, 125897, '08:50 AM', '2007-02-11', '2001-02-11', '2016-02-11', 'No');
+insert into STG_STTM_Account_Transaction values(112, 2, 114797, '10:50 PM', '2012-02-11', '1992-02-11', '2017-01-10', 'No');
+insert into STG_STTM_Account_Transaction values(113, 3, 125587, '11:24 AM', '2013-02-11', '1999-02-11', '2017-01-11', 'No');
+insert into STG_STTM_Account_Transaction values(114, 4, 155897, '01:50 PM', '2001-02-11', '1996-02-11', '2017-01-22', 'Yes');
+insert into STG_STTM_Account_Transaction values(115, 5, 165897, '10:28 AM', '2002-02-11', '1986-02-11', '2015-02-11', 'No');
+insert into STG_STTM_Account_Transaction values(116, 6, 125897, '05:15 PM', '2011-02-11', '2005-02-11', '2015-02-11', 'No');
+insert into STG_STTM_Account_Transaction values(117, 7, 255897, '10:26 AM', '2015-02-11', '2007-02-11', '2015-02-18', 'Yes');
+insert into STG_STTM_Account_Transaction values(118, 8, 825897, '10:50 AM', '2016-02-11', '2002-02-11', '2016-08-15', 'No');
+insert into STG_STTM_Account_Transaction values(119, 9, 555897, '10:59 AM', '2005-02-11', '2000-02-11', '2016-09-25', 'No');
+insert into STG_STTM_Account_Transaction values(1110, 10, 665897, '10:50 PM', '2009-02-11', '2001-02-11', '2016-02-11', 'No');
+
+create table STG_STTM_Account_Balances (Account_balance_id int not null, last_balance int not null, 
+									new_balance varchar (20), Ledger_Bal int, Actual_Bal int);
+
+insert into STG_STTM_Account_Balances values(1, 665897, 50000, 50000, 30000);
+insert into STG_STTM_Account_Balances values(2, 1065897, 50000, 50000, 30000);
+insert into STG_STTM_Account_Balances values(3, 765897, 90000, 50000, 30000);
+insert into STG_STTM_Account_Balances values(4, 565897, 0, 50000, 30000);
+insert into STG_STTM_Account_Balances values(5, 465897, 110000, 50000, 30000);
+insert into STG_STTM_Account_Balances values(6, 365897, 220000, 50000, 30000);
+insert into STG_STTM_Account_Balances values(7, 25897, 20000, 50000, 30000);
+insert into STG_STTM_Account_Balances values(8, 95897, 90000, 50000, 30000);
+insert into STG_STTM_Account_Balances values(9, 55897, 60000, 50000, 30000, 9);
+insert into STG_STTM_Account_Balances values(10, 65897, 550000, 50000, 30000, 10);
+
+
+create table STG_STTM_MCB_Loan (MVB_Loan_id int not null, Lan_type varchar (20), Loan_amount_demanded int not null,
+							Loan_amount_given int not null, Loan_return_period varchar (20), Loan_guarantee varchar (20),
+							Loan_issued_date date);
+
+insert into STG_STTM_MCB_Loan values(1, 'House Loan', 6500000, 6000000, '3 Years', 'Property Land', '2009-02-11');
+insert into STG_STTM_MCB_Loan values(2, 'House Loan', 5500000, 5000000, '3 Years', 'Property Land', '2010-03-11');
+insert into STG_STTM_MCB_Loan values(3, 'House Loan', 5500000, 5000000, '3 Years', 'Property Land', '2011-01-26');
+insert into STG_STTM_MCB_Loan values(4, 'Car Loan', 300000, 300000, '3 Years', 'Property Land', '2005-02-11');
+insert into STG_STTM_MCB_Loan values(5, 'House Loan', 5500000, 5000000, '3 Years', 'Property Land', '2012-09-16');
+insert into STG_STTM_MCB_Loan values(6, 'House Loan', 5500000, 5000000, '3 Years', 'Property Land', '2009-09-28');
+insert into STG_STTM_MCB_Loan values(7, 'House Loan', 5500000, 5000000, '3 Years', 'Property Land', '2014-02-18');
+insert into STG_STTM_MCB_Loan values(8, 'Car Loan', 500000, 500000, '3 Years', 'Property Land', '2009-02-11');
+insert into STG_STTM_MCB_Loan values(9, 'House Loan', 5500000, 5000000, '3 Years', 'Property Land', '2015-02-22');
+insert into STG_STTM_MCB_Loan values(1, 'House Loan', 5500000, 5000000, '3 Years', 'Property Land', '2016-02-11');
+
+
+create table STG_STTM_Credit_Card (Credit_Card_id int not null, Credit_Card_no int not null, Credit_Card_limit int not null,
+									Loan_return_period varchar (20), Credit_Card_repaid_status varchar (20));
+
+								
+insert into STG_STTM_Credit_Card values(1, 147852, 50000, '30 Days', 'Paid');
+insert into STG_STTM_Credit_Card values(2, 257852, 100000, '30 Days', 'Paid');
+insert into STG_STTM_Credit_Card values(3, 367852, 50000, '30 Days', 'Paid');
+insert into STG_STTM_Credit_Card values(4, 967852, 50000, '30 Days', 'Not Paid');
+insert into STG_STTM_Credit_Card values(5, 697852, 100000, '30 Days', 'Paid');
+insert into STG_STTM_Credit_Card values(6, 857852, 50000, '30 Days', 'Paid');
+insert into STG_STTM_Credit_Card values(7, 957852, 50000, '30 Days', 'Paid');
+insert into STG_STTM_Credit_Card values(8, 757852, 50000, '30 Days', 'Not Paid');
+insert into STG_STTM_Credit_Card values(9, 517852, 100000, '30 Days', 'Paid');
+insert into STG_STTM_Credit_Card values(10, 627852, 50000, '30 Days', 'Paid');

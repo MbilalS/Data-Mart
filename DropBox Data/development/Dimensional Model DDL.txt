@@ -1,0 +1,493 @@
+USE [DimensionalModel]
+GO
+
+/****** Object:  Table [dbo].[Account_Dim]    Script Date: 2/14/2017 1:14:21 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Account_Dim](
+	[account_DW_id] [bigint] NOT NULL,
+	[internal_key] [bigint] NOT NULL,
+	[account_id] [bigint] NOT NULL,
+	[account_type] [varchar](50) NOT NULL,
+	[account_number] [bigint] NOT NULL,
+	[category] [varchar](50) NOT NULL,
+	[open_date] [date] NOT NULL,
+	[close_date] [date] NOT NULL,
+	[eff_from_TSTMT] [datetime] NOT NULL,
+	[eff_to_TSTMT] [datetime] NOT NULL,
+	[insert_TSTMT] [datetime] NOT NULL,
+	[update_TSTMT] [datetime] NOT NULL,
+	[current_flag] [bit] NOT NULL,
+	[last_balance] [bigint] NOT NULL,
+	[new_balance] [bigint] NOT NULL,
+	[ledger_balance] [bigint] NOT NULL,
+	[actual_balance] [bigint] NOT NULL,
+	[account_status] [varchar](50) NOT NULL,
+	[ATM_limit] [varchar](50) NOT NULL,
+	[ownership_type] [varchar](50) NOT NULL,
+	[deposit_type] [varchar](50) NOT NULL,
+	[value_date_mode] [varchar](50) NOT NULL,
+	[zakat_exampt] [varchar](50) NOT NULL,
+	[AccountType] [varchar](50) NOT NULL,
+	[account_balance] [bigint] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[account_DW_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+
+
+
+USE [DimensionalModel]
+GO
+
+/****** Object:  Table [dbo].[Branch_dim]    Script Date: 2/14/2017 1:14:38 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Branch_dim](
+	[branch_dw_id] [bigint] NOT NULL,
+	[branch_code] [bigint] NOT NULL,
+	[branch_name] [varchar](50) NOT NULL,
+	[branch_city] [varchar](50) NOT NULL,
+	[branch_address] [varchar](50) NOT NULL,
+	[insert_TSTMT] [datetime] NOT NULL,
+	[update_TSTMT] [datetime] NOT NULL,
+	[branch_state] [varchar](50) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[branch_dw_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+
+USE [DimensionalModel]
+GO
+
+/****** Object:  Table [dbo].[Cust_Acc_Dim]    Script Date: 2/14/2017 1:14:59 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Cust_Acc_Dim](
+	[Cust_Acc_DW_id] [bigint] NOT NULL,
+	[customer_DW_id] [bigint] NOT NULL,
+	[account_DW_id] [bigint] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Cust_Acc_DW_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Cust_Acc_Dim]  WITH CHECK ADD FOREIGN KEY([account_DW_id])
+REFERENCES [dbo].[Account_Dim] ([account_DW_id])
+GO
+
+ALTER TABLE [dbo].[Cust_Acc_Dim]  WITH CHECK ADD FOREIGN KEY([customer_DW_id])
+REFERENCES [dbo].[Customer_Dim] ([customer_DW_id])
+GO
+
+
+
+
+
+USE [DimensionalModel]
+GO
+
+/****** Object:  Table [dbo].[Customer_ATM_Dim]    Script Date: 2/14/2017 1:15:14 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Customer_ATM_Dim](
+	[Customer_ATM_DW_id] [bigint] NOT NULL,
+	[customer_account_no] [varchar](50) NOT NULL,
+	[customer_card_no] [varchar](50) NOT NULL,
+	[insert_TSTMT] [datetime] NOT NULL,
+	[update_TSTMT] [datetime] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Customer_ATM_DW_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+
+USE [DimensionalModel]
+GO
+
+/****** Object:  Table [dbo].[Customer_Closure_dim]    Script Date: 2/14/2017 1:15:41 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Customer_Closure_dim](
+	[Customer_Closure_DW_id] [bigint] NOT NULL,
+	[customer_id] [bigint] NOT NULL,
+	[customer_closure_id] [bigint] NOT NULL,
+	[startDate] [date] NOT NULL,
+	[end_date] [date] NOT NULL,
+	[insert_TSTMT] [datetime] NOT NULL,
+	[update_TSTMT] [datetime] NOT NULL,
+	[closure_reason] [varchar](100) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Customer_Closure_DW_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+
+USE [DimensionalModel]
+GO
+
+/****** Object:  Table [dbo].[Customer_Contact_Dim]    Script Date: 2/14/2017 1:15:53 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Customer_Contact_Dim](
+	[customer_contact_dw_id] [bigint] NOT NULL,
+	[customer_id] [bigint] NOT NULL,
+	[contact_id] [bigint] NOT NULL,
+	[contact_no] [bigint] NOT NULL,
+	[email] [varchar](50) NOT NULL,
+	[postal_code] [bigint] NOT NULL,
+	[address] [varchar](50) NOT NULL,
+	[state] [varchar](50) NOT NULL,
+	[insert_TSTMT] [datetime] NOT NULL,
+	[update_TSTMT] [datetime] NOT NULL,
+	[city] [varchar](50) NOT NULL,
+	[country_citizen] [varchar](50) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[customer_contact_dw_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+
+
+USE [DimensionalModel]
+GO
+
+/****** Object:  Table [dbo].[Customer_Dim]    Script Date: 2/14/2017 1:16:12 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Customer_Dim](
+	[customer_DW_id] [bigint] NOT NULL,
+	[customer_id] [bigint] NOT NULL,
+	[CNIC] [varchar](50) NOT NULL,
+	[eff_from_TSTMT] [datetime] NOT NULL,
+	[eff_to_TSTMT] [datetime] NOT NULL,
+	[insert_TSTMT] [datetime] NOT NULL,
+	[update_TSTMT] [datetime] NOT NULL,
+	[current_flag] [bit] NOT NULL,
+	[income] [float] NOT NULL,
+	[marital_status] [varchar](50) NOT NULL,
+	[childern] [varchar](50) NOT NULL,
+	[credit] [varchar](50) NOT NULL,
+	[gender] [varchar](50) NOT NULL,
+	[username] [varchar](50) NOT NULL,
+	[passward] [varchar](50) NOT NULL,
+	[alias] [varchar](50) NOT NULL,
+	[resgisteted_date] [date] NOT NULL,
+	[surname] [varchar](50) NOT NULL,
+	[first_name] [varchar](50) NOT NULL,
+	[middle_name] [varchar](50) NOT NULL,
+	[last_name] [varchar](50) NOT NULL,
+	[surname_first] [varchar](50) NOT NULL,
+	[salutation] [varchar](50) NOT NULL,
+	[birth_date] [varchar](50) NOT NULL,
+	[branch_DW_id] [bigint] NOT NULL,
+	[Account_DW_id] [bigint] NOT NULL,
+	[customer_ATM_DW_id] [bigint] NOT NULL,
+	[Customer_Closure_DW_id] [bigint] NOT NULL,
+	[customer_contact_DW_id] [bigint] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[customer_DW_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Customer_Dim]  WITH CHECK ADD FOREIGN KEY([Account_DW_id])
+REFERENCES [dbo].[Account_Dim] ([account_DW_id])
+GO
+
+ALTER TABLE [dbo].[Customer_Dim]  WITH CHECK ADD FOREIGN KEY([branch_DW_id])
+REFERENCES [dbo].[Branch_dim] ([branch_dw_id])
+GO
+
+ALTER TABLE [dbo].[Customer_Dim]  WITH CHECK ADD FOREIGN KEY([customer_ATM_DW_id])
+REFERENCES [dbo].[Customer_ATM_Dim] ([Customer_ATM_DW_id])
+GO
+
+ALTER TABLE [dbo].[Customer_Dim]  WITH CHECK ADD FOREIGN KEY([Customer_Closure_DW_id])
+REFERENCES [dbo].[Customer_Closure_dim] ([Customer_Closure_DW_id])
+GO
+
+ALTER TABLE [dbo].[Customer_Dim]  WITH CHECK ADD FOREIGN KEY([customer_contact_DW_id])
+REFERENCES [dbo].[Customer_Contact_Dim] ([customer_contact_dw_id])
+GO
+
+
+
+
+
+
+USE [DimensionalModel]
+GO
+
+/****** Object:  Table [dbo].[Employee_attendance_dim]    Script Date: 2/14/2017 1:16:28 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Employee_attendance_dim](
+	[Emp_attendance_dw_id] [bigint] NOT NULL,
+	[employee_id] [bigint] NOT NULL,
+	[insert_TSTMT] [datetime] NOT NULL,
+	[update_TSTMT] [datetime] NOT NULL,
+	[todays_date] [datetime] NOT NULL,
+	[is_attend] [varchar](50) NOT NULL,
+	[Leave_id] [int] NOT NULL,
+	[total_leave_yearly] [int] NOT NULL,
+	[deducted_leaves] [int] NOT NULL,
+	[remaining_leaves] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Emp_attendance_dw_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+
+
+USE [DimensionalModel]
+GO
+
+/****** Object:  Table [dbo].[Employee_information_dim]    Script Date: 2/14/2017 1:16:40 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Employee_information_dim](
+	[employee_dw_id] [bigint] NOT NULL,
+	[employee_id] [bigint] NOT NULL,
+	[employee_name] [varchar](50) NOT NULL,
+	[employee_gender] [varchar](50) NOT NULL,
+	[joining_date] [datetime] NOT NULL,
+	[supervisor_id] [bigint] NOT NULL,
+	[email] [varchar](50) NOT NULL,
+	[insert_TSTMT] [datetime] NOT NULL,
+	[update_TSTMT] [datetime] NOT NULL,
+	[Emp_attendance_dw_id] [bigint] NOT NULL,
+	[UserName] [varchar](50) NOT NULL,
+	[Password] [varchar](50) NOT NULL,
+	[Emp_Role] [varchar](50) NOT NULL,
+	[Salary] [real] NOT NULL,
+	[Commission] [real] NOT NULL,
+	[Paying_Date] [datetime] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[employee_dw_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+
+
+USE [DimensionalModel]
+GO
+
+/****** Object:  Table [dbo].[Organization_Account_Dim]    Script Date: 2/14/2017 1:16:56 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Organization_Account_Dim](
+	[Organization_Account_DW_id] [bigint] NOT NULL,
+	[Organization_Account_id] [bigint] NOT NULL,
+	[business_type] [varchar](50) NOT NULL,
+	[Organization_address] [varchar](50) NOT NULL,
+	[contact_no] [varchar](50) NOT NULL,
+	[mailing_address] [varchar](50) NOT NULL,
+	[insert_TSTMT] [datetime] NOT NULL,
+	[update_TSTMT] [datetime] NOT NULL,
+	[account_type] [varchar](50) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Organization_Account_DW_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+
+
+USE [DimensionalModel]
+GO
+
+/****** Object:  Table [dbo].[Product_dim]    Script Date: 2/14/2017 1:17:08 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Product_dim](
+	[Product_DW_id] [bigint] NOT NULL,
+	[MCB_loan_id] [bigint] NOT NULL,
+	[loan_type] [varchar](50) NOT NULL,
+	[loan_demanded] [int] NOT NULL,
+	[loan_given] [int] NOT NULL,
+	[Loan_return_period] [varchar](50) NOT NULL,
+	[Credit_Card_return_period] [varchar](50) NOT NULL,
+	[issued_date] [datetime] NOT NULL,
+	[guarantee] [varchar](50) NOT NULL,
+	[insert_TSTMT] [datetime] NOT NULL,
+	[Update_TSTMT] [datetime] NOT NULL,
+	[card_id] [bigint] NOT NULL,
+	[card_NO] [bigint] NOT NULL,
+	[card_limit] [bigint] NOT NULL,
+	[repaid_Status] [varchar](50) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Product_DW_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
